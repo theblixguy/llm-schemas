@@ -1,0 +1,59 @@
+{
+  "name": "llm-schemas",
+  "version": "1.0.0",
+  "description": "Shared Zod schemas for LLM API request validation (OpenAI Chat Completions, OpenAI Responses, Anthropic Messages)",
+  "keywords": [
+    "zod",
+    "schema",
+    "validation",
+    "llm",
+    "openai",
+    "anthropic",
+    "claude",
+    "chat-completions",
+    "responses-api",
+    "typescript"
+  ],
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./openai": {
+      "import": "./dist/openai/index.js",
+      "types": "./dist/openai/index.d.ts"
+    },
+    "./openai/chat-completions": {
+      "import": "./dist/openai/chat-completions/index.js",
+      "types": "./dist/openai/chat-completions/index.d.ts"
+    },
+    "./openai/responses": {
+      "import": "./dist/openai/responses/index.js",
+      "types": "./dist/openai/responses/index.d.ts"
+    },
+    "./anthropic": {
+      "import": "./dist/anthropic/index.js",
+      "types": "./dist/anthropic/index.d.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run",
+    "lint": "oxlint src test",
+    "check": "tsc --noEmit && tsc --noEmit -p tsconfig.test.json && oxlint src test && vitest run"
+  },
+  "dependencies": {
+    "zod": "4.3.6"
+  },
+  "devDependencies": {
+    "oxlint": "1.55.0",
+    "typescript": "5.9.3",
+    "vitest": "4.1.0"
+  }
+}
