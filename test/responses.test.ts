@@ -1,5 +1,8 @@
 import { describe, it, expect } from "vitest";
-import { ResponsesRequestSchema, FunctionToolSchema } from "../src/openai/responses/index.js";
+import {
+  ResponsesRequestSchema,
+  FunctionToolSchema,
+} from "../src/openai/responses/index.js";
 
 describe("ResponsesRequestSchema", () => {
   const validRequest = {
@@ -24,7 +27,12 @@ describe("ResponsesRequestSchema", () => {
     const result = ResponsesRequestSchema.safeParse({
       model: "o3-mini",
       input: [
-        { type: "function_call", call_id: "call_1", name: "search", arguments: "{}" },
+        {
+          type: "function_call",
+          call_id: "call_1",
+          name: "search",
+          arguments: "{}",
+        },
         { type: "function_call_output", call_id: "call_1", output: "result" },
       ],
     });
@@ -101,9 +109,7 @@ describe("ResponsesRequestSchema", () => {
   it("accepts message input with array content", () => {
     const result = ResponsesRequestSchema.safeParse({
       model: "o3-mini",
-      input: [
-        { role: "user", content: [{ type: "text", text: "Hello" }] },
-      ],
+      input: [{ role: "user", content: [{ type: "text", text: "Hello" }] }],
     });
     expect(result.success).toBe(true);
   });
@@ -115,7 +121,9 @@ describe("ResponsesRequestSchema", () => {
     });
     expect(result.success).toBe(true);
     if (result.success) {
-      expect((result.data as Record<string, unknown>).custom_field).toBe("hello");
+      expect((result.data as Record<string, unknown>).custom_field).toBe(
+        "hello",
+      );
     }
   });
 });

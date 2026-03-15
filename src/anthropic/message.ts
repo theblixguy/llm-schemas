@@ -94,10 +94,7 @@ export const LooseContentBlockSchema = z.union([
  */
 export const MessageSchema = z.object({
   role: z.enum(["user", "assistant"]),
-  content: z.union([
-    z.string(),
-    z.array(LooseContentBlockSchema),
-  ]),
+  content: z.union([z.string(), z.array(LooseContentBlockSchema)]),
 });
 
 /** Inferred type from {@link TextBlockSchema}. */

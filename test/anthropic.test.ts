@@ -31,16 +31,19 @@ describe("AnthropicRequestSchema", () => {
 
   it("rejects non-positive max_tokens", () => {
     expect(
-      AnthropicRequestSchema.safeParse({ ...validRequest, max_tokens: 0 }).success,
+      AnthropicRequestSchema.safeParse({ ...validRequest, max_tokens: 0 })
+        .success,
     ).toBe(false);
     expect(
-      AnthropicRequestSchema.safeParse({ ...validRequest, max_tokens: -1 }).success,
+      AnthropicRequestSchema.safeParse({ ...validRequest, max_tokens: -1 })
+        .success,
     ).toBe(false);
   });
 
   it("rejects empty messages array", () => {
     expect(
-      AnthropicRequestSchema.safeParse({ ...validRequest, messages: [] }).success,
+      AnthropicRequestSchema.safeParse({ ...validRequest, messages: [] })
+        .success,
     ).toBe(false);
   });
 
@@ -57,9 +60,7 @@ describe("AnthropicRequestSchema", () => {
   it("accepts array content with text blocks", () => {
     const result = AnthropicRequestSchema.safeParse({
       ...validRequest,
-      messages: [
-        { role: "user", content: [{ type: "text", text: "Hello" }] },
-      ],
+      messages: [{ role: "user", content: [{ type: "text", text: "Hello" }] }],
     });
     expect(result.success).toBe(true);
   });
@@ -84,7 +85,12 @@ describe("AnthropicRequestSchema", () => {
     expect(result.success).toBe(true);
     if (result.success) {
       expect(result.data.messages[0]!.content).toEqual([
-        { type: "tool_use", id: "toolu_01", name: "get_weather", input: { location: "SF" } },
+        {
+          type: "tool_use",
+          id: "toolu_01",
+          name: "get_weather",
+          input: { location: "SF" },
+        },
       ]);
     }
   });
@@ -96,7 +102,11 @@ describe("AnthropicRequestSchema", () => {
         {
           role: "user",
           content: [
-            { type: "tool_result", tool_use_id: "toolu_01", content: "Sunny, 72°F" },
+            {
+              type: "tool_result",
+              tool_use_id: "toolu_01",
+              content: "Sunny, 72°F",
+            },
           ],
         },
       ],
@@ -234,7 +244,9 @@ describe("AnthropicRequestSchema", () => {
     });
     expect(result.success).toBe(true);
     if (result.success) {
-      expect((result.data as Record<string, unknown>).custom_field).toBe("hello");
+      expect((result.data as Record<string, unknown>).custom_field).toBe(
+        "hello",
+      );
     }
   });
 });

@@ -17,7 +17,13 @@ export const ContentPartSchema = z.looseObject({
   text: z.string().optional(),
 });
 
-const VALID_ROLES = ["system", "developer", "user", "assistant", "tool"] as const;
+const VALID_ROLES = [
+  "system",
+  "developer",
+  "user",
+  "assistant",
+  "tool",
+] as const;
 
 /**
  * A single message in the chat completions `messages` array.

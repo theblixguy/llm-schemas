@@ -45,9 +45,7 @@ describe("OpenAIRequestSchema", () => {
   it("accepts array content format in messages", () => {
     const result = OpenAIRequestSchema.safeParse({
       model: "gpt-4",
-      messages: [
-        { role: "user", content: [{ type: "text", text: "Hello" }] },
-      ],
+      messages: [{ role: "user", content: [{ type: "text", text: "Hello" }] }],
     });
     expect(result.success).toBe(true);
   });
@@ -134,7 +132,9 @@ describe("OpenAIRequestSchema", () => {
     });
     expect(result.success).toBe(true);
     if (result.success) {
-      expect((result.data as Record<string, unknown>).custom_field).toBe("hello");
+      expect((result.data as Record<string, unknown>).custom_field).toBe(
+        "hello",
+      );
     }
   });
 });

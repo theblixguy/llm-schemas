@@ -46,13 +46,16 @@
   "scripts": {
     "build": "tsc",
     "test": "vitest run",
+    "fmt": "oxfmt --write src/ test/",
+    "fmt:check": "oxfmt --check src/ test/",
     "lint": "oxlint src test",
-    "check": "tsc --noEmit && tsc --noEmit -p tsconfig.test.json && oxlint src test && vitest run"
+    "check": "tsc --noEmit && tsc --noEmit -p tsconfig.test.json && oxfmt --check src/ test/ && oxlint src test && vitest run"
   },
   "dependencies": {
     "zod": "4.3.6"
   },
   "devDependencies": {
+    "oxfmt": "0.40.0",
     "oxlint": "1.55.0",
     "typescript": "5.9.3",
     "vitest": "4.1.0"
