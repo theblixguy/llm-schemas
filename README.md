@@ -1,4 +1,4 @@
-# llm-schemas
+# llm-schemas [![npm version](https://img.shields.io/npm/v/llm-schemas)](https://www.npmjs.com/package/llm-schemas) ![npm downloads](https://img.shields.io/npm/d18m/llm-schemas)
 
 Shared Zod schemas for validating LLM API request bodies. Covers OpenAI Chat Completions, OpenAI Responses, and Anthropic Messages. Used by both [llm-mock-server](https://github.com/theblixguy/llm-mock-server) and [copilot-sdk-proxy](https://github.com/theblixguy/copilot-sdk-proxy).
 
