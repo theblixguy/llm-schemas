@@ -55,7 +55,7 @@
     "zod": "4.3.6"
   },
   "devDependencies": {
-    "oxfmt": "0.40.0",
+    "oxfmt": "0.41.0",
     "oxlint": "1.55.0",
     "typescript": "5.9.3",
     "vitest": "4.1.0"
