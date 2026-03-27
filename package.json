@@ -15,7 +15,9 @@
     "typescript"
   ],
   "license": "MIT",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "type": "module",
   "engines": {
     "node": ">=22"
@@ -55,9 +57,9 @@
     "zod": "4.3.6"
   },
   "devDependencies": {
-    "oxfmt": "0.40.0",
-    "oxlint": "1.55.0",
-    "typescript": "5.9.3",
-    "vitest": "4.1.0"
+    "oxfmt": "0.42.0",
+    "oxlint": "1.57.0",
+    "typescript": "6.0.2",
+    "vitest": "4.1.2"
   }
 }
