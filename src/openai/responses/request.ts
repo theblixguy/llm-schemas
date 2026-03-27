@@ -1,6 +1,6 @@
 import { z } from "zod";
-import { InputItemSchema } from "./input.js";
-import { RawToolSchema } from "./tool.js";
+import { InputItemSchema } from "#/openai/responses/input.js";
+import { RawToolSchema } from "#/openai/responses/tool.js";
 
 /**
  * Request body for POST `/v1/responses`.

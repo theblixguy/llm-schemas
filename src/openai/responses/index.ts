@@ -3,16 +3,16 @@ export {
   FunctionCallInputSchema,
   FunctionCallOutputSchema,
   InputItemSchema,
-} from "./input.js";
+} from "#/openai/responses/input.js";
 export type {
   InputMessage,
   FunctionCallInput,
   FunctionCallOutput,
   InputItem,
-} from "./input.js";
+} from "#/openai/responses/input.js";
 
-export { FunctionToolSchema, RawToolSchema } from "./tool.js";
-export type { FunctionTool } from "./tool.js";
+export { FunctionToolSchema, RawToolSchema } from "#/openai/responses/tool.js";
+export type { FunctionTool } from "#/openai/responses/tool.js";
 
-export { ResponsesRequestSchema } from "./request.js";
-export type { ResponsesRequest } from "./request.js";
+export { ResponsesRequestSchema } from "#/openai/responses/request.js";
+export type { ResponsesRequest } from "#/openai/responses/request.js";

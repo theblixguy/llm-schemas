@@ -1,6 +1,6 @@
 import { z } from "zod";
-import { MessageSchema } from "./message.js";
-import { ToolSchema } from "./tool.js";
+import { MessageSchema } from "#/openai/chat-completions/message.js";
+import { ToolSchema } from "#/openai/chat-completions/tool.js";
 
 /**
  * Request body for POST `/v1/chat/completions`.
