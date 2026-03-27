@@ -5,16 +5,16 @@ export {
   KnownContentBlockSchema,
   LooseContentBlockSchema,
   MessageSchema,
-} from "./message.js";
+} from "#/anthropic/message.js";
 export type {
   TextBlock,
   ToolUseBlock,
   ToolResultBlock,
   Message,
-} from "./message.js";
+} from "#/anthropic/message.js";
 
-export { ToolDefinitionSchema } from "./tool.js";
-export type { ToolDefinition } from "./tool.js";
+export { ToolDefinitionSchema } from "#/anthropic/tool.js";
+export type { ToolDefinition } from "#/anthropic/tool.js";
 
-export { AnthropicRequestSchema } from "./request.js";
-export type { AnthropicRequest } from "./request.js";
+export { AnthropicRequestSchema } from "#/anthropic/request.js";
+export type { AnthropicRequest } from "#/anthropic/request.js";

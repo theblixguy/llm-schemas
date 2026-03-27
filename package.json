@@ -19,6 +19,9 @@
     "dist"
   ],
   "type": "module",
+  "imports": {
+    "#/*": "./src/*"
+  },
   "engines": {
     "node": ">=22"
   },

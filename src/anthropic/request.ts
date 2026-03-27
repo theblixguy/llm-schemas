@@ -1,6 +1,6 @@
 import { z } from "zod";
-import { MessageSchema, TextBlockSchema } from "./message.js";
-import { ToolDefinitionSchema } from "./tool.js";
+import { MessageSchema, TextBlockSchema } from "#/anthropic/message.js";
+import { ToolDefinitionSchema } from "#/anthropic/tool.js";
 
 /**
  * Request body for POST `/v1/messages`.
