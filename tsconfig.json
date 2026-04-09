@@ -3,6 +3,7 @@
     "target": "ES2025",
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
+    "customConditions": ["llm-schemas-dev"],
     "declaration": true,
     "outDir": "dist",
     "rootDir": "src",

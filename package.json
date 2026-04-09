@@ -20,7 +20,10 @@
   ],
   "type": "module",
   "imports": {
-    "#/*": "./src/*"
+    "#/*": {
+      "llm-schemas-dev": "./src/*",
+      "default": "./dist/*"
+    }
   },
   "engines": {
     "node": ">=22"
