@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { OpenAIRequestSchema } from "#/openai/chat-completions/index.js";
+import { OpenAIRequestSchema } from "#openai/chat-completions/index.js";
 
 describe("OpenAIRequestSchema", () => {
   const validRequest = {

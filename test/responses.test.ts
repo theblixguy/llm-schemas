@@ -2,7 +2,7 @@ import { describe, it, expect } from "vitest";
 import {
   ResponsesRequestSchema,
   FunctionToolSchema,
-} from "#/openai/responses/index.js";
+} from "#openai/responses/index.js";
 
 describe("ResponsesRequestSchema", () => {
   const validRequest = {

@@ -1,6 +1,6 @@
 {
   "name": "llm-schemas",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Shared Zod schemas for LLM API request validation (OpenAI Chat Completions, OpenAI Responses, Anthropic Messages)",
   "keywords": [
     "zod",
@@ -20,7 +20,7 @@
   ],
   "type": "module",
   "imports": {
-    "#/*": {
+    "#*": {
       "llm-schemas-dev": "./src/*",
       "default": "./dist/*"
     }
