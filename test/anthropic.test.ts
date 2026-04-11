@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { AnthropicRequestSchema } from "#/anthropic/index.js";
+import { AnthropicRequestSchema } from "#anthropic/index.js";
 
 describe("AnthropicRequestSchema", () => {
   const validRequest = {
