@@ -1,6 +1,6 @@
 {
   "name": "llm-schemas",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Shared Zod schemas for LLM API request validation (OpenAI Chat Completions, OpenAI Responses, Anthropic Messages)",
   "keywords": [
     "zod",
@@ -60,12 +60,12 @@
     "check": "tsc --noEmit && tsc --noEmit -p tsconfig.test.json && oxfmt --check src/ test/ && oxlint src test && vitest run"
   },
   "dependencies": {
-    "zod": "4.3.6"
+    "zod": "4.4.2"
   },
   "devDependencies": {
-    "oxfmt": "0.44.0",
-    "oxlint": "1.59.0",
-    "typescript": "6.0.2",
-    "vitest": "4.1.4"
+    "oxfmt": "0.47.0",
+    "oxlint": "1.62.0",
+    "typescript": "6.0.3",
+    "vitest": "4.1.5"
   }
 }
