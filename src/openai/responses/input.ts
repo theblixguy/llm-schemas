@@ -61,13 +61,22 @@ export const FunctionCallOutputSchema = z.object({
 });
 
 /**
- * Union of all valid input item types. The Responses API `input` field
- * accepts an array of these when it's not a plain string.
+ * Any other input item type (`reasoning`, `item_reference`, `computer_call`,
+ * `mcp_call`, the various tool-call items, etc.), identified by its `type`.
+ * Item-specific fields are allowed.
+ */
+export const UnknownInputItemSchema = z.looseObject({ type: z.string() });
+
+/**
+ * A single item in the Responses API `input` array, used when `input` is an
+ * array rather than a plain string: a message, function_call,
+ * function_call_output, or any other item type.
  */
 export const InputItemSchema = z.union([
   InputMessageSchema,
   FunctionCallInputSchema,
   FunctionCallOutputSchema,
+  UnknownInputItemSchema,
 ]);
 
 /** Inferred type from {@link InputMessageSchema}. */
@@ -76,5 +85,7 @@ export type InputMessage = z.infer<typeof InputMessageSchema>;
 export type FunctionCallInput = z.infer<typeof FunctionCallInputSchema>;
 /** Inferred type from {@link FunctionCallOutputSchema}. */
 export type FunctionCallOutput = z.infer<typeof FunctionCallOutputSchema>;
+/** Inferred type from {@link UnknownInputItemSchema}. */
+export type UnknownInputItem = z.infer<typeof UnknownInputItemSchema>;
 /** Inferred type from {@link InputItemSchema}. */
 export type InputItem = z.infer<typeof InputItemSchema>;

@@ -1,15 +1,12 @@
 import { z } from "zod";
 import { MessageSchema, TextBlockSchema } from "#anthropic/message.js";
-import { ToolDefinitionSchema } from "#anthropic/tool.js";
+import { ToolSchema } from "#anthropic/tool.js";
 
 /**
  * Request body for POST `/v1/messages`.
- * Covers every field from the Anthropic API spec.
  *
- * Uses looseObject so unknown fields pass through without failing validation.
- * Fields we don't parse ourselves are typed as `z.unknown().optional()`.
- *
- * `model`, `max_tokens`, and `messages` are required.
+ * `model`, `max_tokens`, and `messages` are required; every other field is
+ * optional, and unrecognized fields are allowed.
  *
  * @see https://docs.anthropic.com/en/api/messages
  *
@@ -28,7 +25,9 @@ export const AnthropicRequestSchema = z.looseObject({
   messages: z.array(MessageSchema).min(1, "Messages are required"),
   cache_control: z.unknown().optional(),
   container: z.unknown().optional(),
+  context_management: z.unknown().optional(),
   inference_geo: z.string().optional(),
+  mcp_servers: z.unknown().optional(),
   metadata: z.record(z.string(), z.unknown()).optional(),
   output_config: z.unknown().optional(),
   service_tier: z.string().optional(),
@@ -38,7 +37,7 @@ export const AnthropicRequestSchema = z.looseObject({
   temperature: z.number().optional(),
   thinking: z.unknown().optional(),
   tool_choice: z.unknown().optional(),
-  tools: z.array(ToolDefinitionSchema).optional(),
+  tools: z.array(ToolSchema).optional(),
   top_k: z.number().optional(),
   top_p: z.number().optional(),
 });

@@ -125,6 +125,43 @@ describe("OpenAIRequestSchema", () => {
     expect(result.success).toBe(true);
   });
 
+  it("accepts custom tool definitions", () => {
+    const result = OpenAIRequestSchema.safeParse({
+      ...validRequest,
+      tools: [
+        { type: "custom", custom: { name: "code_exec", description: "Run" } },
+      ],
+    });
+    expect(result.success).toBe(true);
+  });
+
+  it("accepts custom tool calls on an assistant message", () => {
+    const result = OpenAIRequestSchema.safeParse({
+      model: "gpt-5",
+      messages: [
+        {
+          role: "assistant",
+          tool_calls: [
+            {
+              id: "call_1",
+              type: "custom",
+              custom: { name: "exec", input: "ls" },
+            },
+          ],
+        },
+      ],
+    });
+    expect(result.success).toBe(true);
+  });
+
+  it("accepts the legacy function role", () => {
+    const result = OpenAIRequestSchema.safeParse({
+      ...validRequest,
+      messages: [{ role: "function", name: "search", content: "result" }],
+    });
+    expect(result.success).toBe(true);
+  });
+
   it("passes through unknown top-level fields", () => {
     const result = OpenAIRequestSchema.safeParse({
       ...validRequest,

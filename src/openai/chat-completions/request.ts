@@ -1,15 +1,12 @@
 import { z } from "zod";
 import { MessageSchema } from "#openai/chat-completions/message.js";
-import { ToolSchema } from "#openai/chat-completions/tool.js";
+import { ChatCompletionToolSchema } from "#openai/chat-completions/tool.js";
 
 /**
  * Request body for POST `/v1/chat/completions`.
- * Covers every field from the OpenAI API spec.
  *
- * Uses looseObject so unknown fields pass through without failing validation.
- * Fields we don't parse ourselves are typed as `z.unknown().optional()`.
- *
- * `model` and `messages` are the only required fields.
+ * `model` and `messages` are the only required fields; every other field is
+ * optional, and unrecognized fields are allowed.
  *
  * @see https://platform.openai.com/docs/api-reference/chat/create
  *
@@ -52,7 +49,7 @@ export const OpenAIRequestSchema = z.looseObject({
   stream_options: z.unknown().optional(),
   temperature: z.number().optional(),
   tool_choice: z.unknown().optional(),
-  tools: z.array(ToolSchema).optional(),
+  tools: z.array(ChatCompletionToolSchema).optional(),
   top_logprobs: z.number().optional(),
   top_p: z.number().optional(),
   user: z.string().optional(),

@@ -57,8 +57,8 @@ export const ToolResultBlockSchema = z.object({
 });
 
 /**
- * Discriminated union of the three content block types we actually parse
- * (text, tool_use, tool_result). Discriminates on the `type` field.
+ * A content block with a known, fully-typed shape: a text, tool_use, or
+ * tool_result block.
  */
 export const KnownContentBlockSchema = z.discriminatedUnion("type", [
   TextBlockSchema,
@@ -67,12 +67,9 @@ export const KnownContentBlockSchema = z.discriminatedUnion("type", [
 ]);
 
 /**
- * Accepts any known content block, but also lets unknown block types
- * (like `thinking` or `server_tool_use`) through without failing.
- * The fallback arm is a looseObject that just requires a `type` string.
- *
- * If you need to filter out the unknown blocks after parsing, check
- * each block's `type` against the known set yourself.
+ * A single content block in a message. Either one of the fully-typed blocks
+ * (text, tool_use, tool_result) or any other block type (such as `thinking`
+ * or `server_tool_use`), which is represented by its `type` alone.
  */
 export const LooseContentBlockSchema = z.union([
   KnownContentBlockSchema,
@@ -81,8 +78,9 @@ export const LooseContentBlockSchema = z.union([
 
 /**
  * A single message in the Anthropic `messages` array.
- * Role is always `"user"` or `"assistant"`. Content can be a plain string
- * or an array of content blocks.
+ * Role is `"user"`, `"assistant"`, or `"system"` (the last for
+ * mid-conversation system messages). Content can be a plain string or an
+ * array of content blocks.
  *
  * @example
  * ```ts
@@ -93,7 +91,7 @@ export const LooseContentBlockSchema = z.union([
  * ```
  */
 export const MessageSchema = z.object({
-  role: z.enum(["user", "assistant"]),
+  role: z.enum(["user", "assistant", "system"]),
   content: z.union([z.string(), z.array(LooseContentBlockSchema)]),
 });
 
