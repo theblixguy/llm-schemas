@@ -4,13 +4,10 @@ import { RawToolSchema } from "#openai/responses/tool.js";
 
 /**
  * Request body for POST `/v1/responses`.
- * Covers every field from the OpenAI Responses API spec.
  *
- * Uses looseObject so unknown fields pass through without failing validation.
- * Fields we don't parse ourselves are typed as `z.unknown().optional()`.
- *
- * Both `model` and `input` are optional per the spec. If your app needs them
- * to be required, add your own `.refine()` or check after parsing.
+ * Every field is optional and unrecognized fields are allowed. Both `model`
+ * and `input` are optional per the spec; if your app needs them to be
+ * required, add your own `.refine()` or check after parsing.
  *
  * @see https://platform.openai.com/docs/api-reference/responses/create
  *

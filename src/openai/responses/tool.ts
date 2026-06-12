@@ -1,8 +1,8 @@
 import { z } from "zod";
 
 /**
- * A function tool definition. Only matches tools with `type: "function"`.
- * Use this when you need to narrow to function tools specifically.
+ * A function tool definition in the Responses API `tools` array, with the tool
+ * name and its parameters as JSON Schema at the top level.
  *
  * @example
  * ```ts
@@ -23,10 +23,9 @@ export const FunctionToolSchema = z.object({
 });
 
 /**
- * Accepts any tool shape as a `Record<string, unknown>`.
- * The Responses API has several tool types (web_search, code_interpreter, etc.)
- * and this schema lets them all through. If you only care about function tools,
- * use {@link FunctionToolSchema} instead.
+ * Any tool in the Responses API `tools` array, as a `Record<string, unknown>`.
+ * The Responses API has several tool types (web_search, code_interpreter,
+ * etc.); for function tools specifically, use {@link FunctionToolSchema}.
  */
 export const RawToolSchema = z.record(z.string(), z.unknown());
 

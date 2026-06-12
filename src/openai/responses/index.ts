@@ -2,12 +2,14 @@ export {
   InputMessageSchema,
   FunctionCallInputSchema,
   FunctionCallOutputSchema,
+  UnknownInputItemSchema,
   InputItemSchema,
 } from "#openai/responses/input.js";
 export type {
   InputMessage,
   FunctionCallInput,
   FunctionCallOutput,
+  UnknownInputItem,
   InputItem,
 } from "#openai/responses/input.js";
 

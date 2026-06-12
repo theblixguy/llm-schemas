@@ -13,8 +13,12 @@ export type {
   Message,
 } from "#anthropic/message.js";
 
-export { ToolDefinitionSchema } from "#anthropic/tool.js";
-export type { ToolDefinition } from "#anthropic/tool.js";
+export {
+  ToolDefinitionSchema,
+  ServerToolSchema,
+  ToolSchema,
+} from "#anthropic/tool.js";
+export type { ToolDefinition, ServerTool, Tool } from "#anthropic/tool.js";
 
 export { AnthropicRequestSchema } from "#anthropic/request.js";
 export type { AnthropicRequest } from "#anthropic/request.js";

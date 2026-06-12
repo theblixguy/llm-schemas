@@ -114,6 +114,39 @@ describe("ResponsesRequestSchema", () => {
     expect(result.success).toBe(true);
   });
 
+  it("accepts reasoning and item_reference input items", () => {
+    const result = ResponsesRequestSchema.safeParse({
+      model: "gpt-5",
+      input: [
+        { type: "reasoning", id: "rs_1", summary: [] },
+        { type: "item_reference", id: "msg_1" },
+      ],
+    });
+    expect(result.success).toBe(true);
+    if (result.success) {
+      // Unknown-item fields pass through intact.
+      const items = result.data.input as Array<Record<string, unknown>>;
+      expect(items[0]!.id).toBe("rs_1");
+    }
+  });
+
+  it("still parses known input items strictly alongside unknown ones", () => {
+    const result = ResponsesRequestSchema.safeParse({
+      model: "gpt-5",
+      input: [
+        { role: "user", content: "Hi" },
+        {
+          type: "function_call",
+          call_id: "call_1",
+          name: "search",
+          arguments: "{}",
+        },
+        { type: "reasoning", id: "rs_1" },
+      ],
+    });
+    expect(result.success).toBe(true);
+  });
+
   it("passes through unknown top-level fields", () => {
     const result = ResponsesRequestSchema.safeParse({
       ...validRequest,

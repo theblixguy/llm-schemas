@@ -1,8 +1,8 @@
 import { z } from "zod";
 
 /**
- * A single content part inside a message's content array.
- * Uses looseObject so extra fields (like `image_url`) pass through.
+ * A single content part inside a message's content array. Has a `type` and an
+ * optional `text`; other fields (such as `image_url`) are allowed.
  *
  * @example
  * ```ts
@@ -23,7 +23,38 @@ const VALID_ROLES = [
   "user",
   "assistant",
   "tool",
+  // Deprecated, paired with the legacy `functions`/`function_call` flow, but
+  // still accepted by the API.
+  "function",
 ] as const;
+
+/**
+ * A function tool call on an assistant message. `arguments` is a
+ * JSON-encoded string, not an object.
+ */
+const FunctionToolCallSchema = z.object({
+  index: z.number().optional(),
+  id: z.string().optional(),
+  type: z.string().optional(),
+  function: z.object({
+    name: z.string(),
+    arguments: z.string(),
+  }),
+});
+
+/**
+ * A custom tool call on an assistant message (GPT-5 family). `input` is raw
+ * text rather than JSON-encoded arguments.
+ */
+const CustomToolCallSchema = z.object({
+  index: z.number().optional(),
+  id: z.string().optional(),
+  type: z.literal("custom"),
+  custom: z.object({
+    name: z.string(),
+    input: z.string(),
+  }),
+});
 
 /**
  * A single message in the chat completions `messages` array.
@@ -45,17 +76,7 @@ export const MessageSchema = z.object({
     .optional(),
   name: z.string().optional(),
   tool_calls: z
-    .array(
-      z.object({
-        index: z.number().optional(),
-        id: z.string().optional(),
-        type: z.string().optional(),
-        function: z.object({
-          name: z.string(),
-          arguments: z.string(),
-        }),
-      }),
-    )
+    .array(z.union([FunctionToolCallSchema, CustomToolCallSchema]))
     .optional(),
   tool_call_id: z.string().optional(),
 });

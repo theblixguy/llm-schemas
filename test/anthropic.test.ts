@@ -237,6 +237,53 @@ describe("AnthropicRequestSchema", () => {
     expect(result.success).toBe(true);
   });
 
+  it("accepts server-side tools without input_schema", () => {
+    const result = AnthropicRequestSchema.safeParse({
+      ...validRequest,
+      tools: [
+        { type: "web_search_20250305", name: "web_search", max_uses: 5 },
+        { type: "bash_20250124", name: "bash" },
+      ],
+    });
+    expect(result.success).toBe(true);
+    if (result.success) {
+      // Server-tool-specific fields pass through.
+      const tools = result.data.tools as Array<Record<string, unknown>>;
+      expect(tools[0]!.max_uses).toBe(5);
+    }
+  });
+
+  it("accepts a mix of custom and server-side tools", () => {
+    const result = AnthropicRequestSchema.safeParse({
+      ...validRequest,
+      tools: [
+        { name: "get_weather", input_schema: { type: "object" } },
+        { type: "web_search_20250305", name: "web_search" },
+      ],
+    });
+    expect(result.success).toBe(true);
+  });
+
+  it("accepts a mid-conversation system role message", () => {
+    const result = AnthropicRequestSchema.safeParse({
+      ...validRequest,
+      messages: [
+        { role: "user", content: "Hi" },
+        { role: "system", content: "Stay concise." },
+      ],
+    });
+    expect(result.success).toBe(true);
+  });
+
+  it("accepts mcp_servers and context_management top-level fields", () => {
+    const result = AnthropicRequestSchema.safeParse({
+      ...validRequest,
+      mcp_servers: [{ type: "url", url: "https://example.com", name: "s" }],
+      context_management: { edits: [] },
+    });
+    expect(result.success).toBe(true);
+  });
+
   it("passes through unknown top-level fields", () => {
     const result = AnthropicRequestSchema.safeParse({
       ...validRequest,
