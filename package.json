@@ -60,12 +60,12 @@
     "check": "tsc --noEmit && tsc --noEmit -p tsconfig.test.json && oxfmt --check src/ test/ && oxlint src test && vitest run"
   },
   "dependencies": {
-    "zod": "4.4.2"
+    "zod": "4.4.3"
   },
   "devDependencies": {
-    "oxfmt": "0.47.0",
-    "oxlint": "1.62.0",
+    "oxfmt": "0.54.0",
+    "oxlint": "1.69.0",
     "typescript": "6.0.3",
-    "vitest": "4.1.5"
+    "vitest": "4.1.8"
   }
 }
